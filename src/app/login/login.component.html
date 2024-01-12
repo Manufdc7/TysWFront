@@ -1,0 +1,27 @@
+<div class="login-container">
+  <h1>Iniciar Sesión</h1>
+
+  <form [formGroup]= "loginForm" (ngSubmit)= "onSubmit()">
+
+    <label>Email:<input type="email" formControlName="email"></label>
+    <br>
+    <div *ngIf="loginForm.controls['email'].errors">
+      <div *ngIf="loginForm.controls['email'].errors?.['required']">El campo email es obligatorio</div>
+      <div *ngIf="loginForm.controls['email'].errors?.['email']">El email debe seguir un formato estándar</div>
+    </div>
+
+    <label>Contraseña:<input type="password" formControlName="password"></label>
+    <br>
+    <div *ngIf="loginForm.controls['password'].errors">
+      <div *ngIf="loginForm.controls['password'].errors?.['required']">El campo contraseña es obligatorio</div>
+      <div *ngIf="loginForm.controls['password'].errors?.['minlength']">La contraseña debe tener al menos 6 caracteres</div>
+    </div>
+
+    <button type="submit">Iniciar Sesión</button>
+    <button type="button" (click)="onRegister()">Registrarse</button>
+    <button type="button" (click)="onInvitado()">Jugar como invitado</button>
+
+  </form>
+
+  <span *ngIf="loginValido">¡Sesión iniciada correctamente!</span>
+</div>

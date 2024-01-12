@@ -1,20 +1,34 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-board',
-  standalone: true,
-  imports: [CommonModule],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.css'
+  styleUrls: ['./board.component.css']
 })
 export class BoardComponent {
+  rows: number = 6;
+  columns: number = 7;
+  // Inicializa 'board' directamente en la declaración.
+  board: (string | null)[][] = Array.from({ length: this.rows }, () =>
+    Array.from({ length: this.columns }, () => null)
+  );
 
-  rows: number = 7
-  columns: number = 6
-  brd: string [][]
-
-  constructor(){
-    this.brd = Array(this.rows).fill(null).map(() => Array(this.columns).fill(null));
+  constructor() {
+    // No es necesario inicializar 'board' en el constructor ahora.
   }
 
+  placeToken(columnIndex: number, playerToken: string): void {
+    for (let row = this.rows - 1; row >= 0; row--) {
+      if (this.board[row][columnIndex] === null) {
+        this.board[row][columnIndex] = playerToken;
+        break;
+      }
+    }
+  }
+
+
+  // Supongamos que esta función será llamada por el componente padre que gestiona el estado del juego.
+  onMoveReceived(columnIndex: number, playerToken: string): void {
+    this.placeToken(columnIndex, playerToken);
+  }
 }
