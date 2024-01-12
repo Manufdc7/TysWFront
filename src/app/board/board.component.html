@@ -1,10 +1,9 @@
-<p>board works!</p>
-
-
 <div class="board">
-    <div class="row" *ngFor="let row of brd; let rowIndex = index">
-      <div class="cell" *ngFor="let cell of row; let columnIndex = index">
-        <!-- Aquí puedes agregar contenido a cada celda, como un círculo o un indicador para el jugador -->
+    <div *ngFor="let row of board; let rowIndex = index" class="board-row">
+      <div *ngFor="let cell of row; let columnIndex = index" 
+           class="board-cell"
+           (click)="placeToken(columnIndex, 'R')">
+        <div class="token" [class.playerR]="cell === 'R'" [class.playerY]="cell === 'Y'"></div>
       </div>
     </div>
   </div>
